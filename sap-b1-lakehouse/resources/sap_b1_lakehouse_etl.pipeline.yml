@@ -1,0 +1,20 @@
+# The main pipeline for sap_b1_lakehouse
+
+resources:
+  pipelines:
+    sap_b1_lakehouse_etl:
+      name: sap_b1_lakehouse_etl
+      catalog: ${var.catalog}
+      schema: ${var.schema}
+      serverless: true
+      root_path: "../src/sap_b1_lakehouse_etl"
+
+      libraries:
+        - glob:
+            include: ../src/sap_b1_lakehouse_etl/transformations/**
+
+      environment:
+        dependencies:
+          # We include every dependency defined by pyproject.toml by defining an editable environment
+          # that points to the folder where pyproject.toml is deployed.
+          - --editable ${workspace.file_path}

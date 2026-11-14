@@ -1,0 +1,8 @@
+
+.venv/
+.vscode/
+typings/
+.databricks/
+dist/
+build/
+*.egg-info/
